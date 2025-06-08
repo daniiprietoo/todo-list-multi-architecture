@@ -1,0 +1,26 @@
+{
+  "name": "todo-list-multi-architecture",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "monolith-backend",
+    "layered-backend",
+    "microservices-backend/api-gateway",
+    "microservices-backend/users-service",
+    "microservices-backend/todos-service"
+  ],
+  "scripts": {
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "dev:monolith": "npm run dev --workspace=monolith-backend",
+    "dev:layered": "npm run dev --workspace=layered-backend",
+    "dev:api-gateway": "npm run dev --workspace=microservices-backend/api-gateway",
+    "dev:users-service": "npm run dev --workspace=microservices-backend/users-service",
+    "dev:todos-service": "npm run dev --workspace=microservices-backend/todos-service",
+    "dev:microservices": "concurrently \"npm run dev:api-gateway\" \"npm run dev:users-service\" \"npm run dev:todos-service\"",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:monolith\" \"npm run dev:layered\" \"npm run dev:microservices\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.8.3"
+  }
+}
