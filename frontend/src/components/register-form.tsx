@@ -13,6 +13,7 @@ import { useState } from "react";
 import { registerUser } from "@/api/api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { useArchitectureContext } from "@/hooks/architecture-context";
 
 export function RegisterForm({
   className,
@@ -29,6 +30,7 @@ export function RegisterForm({
     password: "",
     passwordConfirmation: "",
   });
+  const { architecture } = useArchitectureContext();
 
   const navigate = useNavigate();
 
@@ -45,7 +47,7 @@ export function RegisterForm({
       email,
       password,
       passwordConfirmation,
-    });
+    }, architecture);
     if (response.success) {
       navigate("/");
       toast.success("Registration successful! Please log in.");

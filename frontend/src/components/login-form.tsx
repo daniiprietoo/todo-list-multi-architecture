@@ -14,6 +14,7 @@ import { loginUser } from "@/api/api";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "@/hooks/user";
 import { toast } from "sonner";
+import { useArchitectureContext } from "@/hooks/architecture-context";
 
 export function LoginForm({
   className,
@@ -26,6 +27,7 @@ export function LoginForm({
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { user, setUser } = useUser();
+  const { architecture } = useArchitectureContext();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -34,7 +36,7 @@ export function LoginForm({
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
-    const response = await loginUser(formData);
+    const response = await loginUser(formData, architecture);
     if (response.success && response.user) {
       setUser(response.user);
       navigate("/tasks");

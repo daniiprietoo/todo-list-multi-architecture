@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { Architecture } from "@/components/ArchitectureSelector";
+import type { Architecture } from "@/components/architecture-selector";
 
 interface ArchitectureContextType {
   architecture: Architecture;

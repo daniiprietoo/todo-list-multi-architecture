@@ -7,7 +7,7 @@ import { TasksList } from "@/components/tasks-list";
 import type { Task } from "@/components/tasks-list";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { ArchitectureSelector } from "@/components/ArchitectureSelector";
+import { ArchitectureSelector } from "@/components/architecture-selector";
 import { useArchitectureContext } from "@/hooks/architecture-context";
 
 export default function Tasks() {

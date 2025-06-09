@@ -15,7 +15,7 @@ import { toast } from "sonner";
 
 type CreateTaskFormProps = {
   userId: number;
-  architecture: import("@/components/ArchitectureSelector").Architecture;
+  architecture: import("@/components/architecture-selector").Architecture;
   className?: string;
   props?: React.ComponentProps<"div">;
   onTaskCreated?: () => void;
