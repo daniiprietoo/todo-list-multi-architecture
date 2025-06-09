@@ -9,17 +9,17 @@ import {
   type UpdateTaskSchema,
 } from "@/lib/schemas";
 import axios from "axios";
-import type { Architecture } from "@/components/ArchitectureSelector";
+import type { Architecture } from "@/components/architecture-selector";
 
 // Map architecture to API base URL
 function getApi(architecture: Architecture) {
   let baseURL = "/api";
   if (architecture === "monolith") {
-    baseURL = "http://localhost:3000/api";
+    baseURL = `${import.meta.env.VITE_MONOLITH_API_URL}/api`;
   } else if (architecture === "layered") {
-    baseURL = "http://localhost:4000/api";
+    baseURL = `${import.meta.env.VITE_LAYERED_API_URL}/api`;
   } else if (architecture === "microservices") {
-    baseURL = "http://localhost:5000/api";
+    baseURL = `${import.meta.env.VITE_MICROSERVICES_API_URL}/api`;
   }
   return axios.create({
     baseURL,
