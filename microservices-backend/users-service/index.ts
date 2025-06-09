@@ -90,5 +90,5 @@ export default app;
 
 const PORT = process.env.PORT || 4001;
 app.listen(PORT, () => {
-  logger.info(`User Service Server listening on http://localhost:${PORT}`);
+  logger.info(`User Service Server running on http://localhost:${PORT}`);
 });
