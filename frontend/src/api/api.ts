@@ -13,7 +13,7 @@ import type { Architecture } from "@/components/architecture-selector";
 
 // Map architecture to API base URL
 function getApi(architecture: Architecture) {
-  let baseURL = "/api";
+  let baseURL = `${import.meta.env.VITE_MICROSERVICES_API_URL}/api`;
   if (architecture === "monolith") {
     baseURL = `${import.meta.env.VITE_MONOLITH_API_URL}/api`;
   } else if (architecture === "layered") {

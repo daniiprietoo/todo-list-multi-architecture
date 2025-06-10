@@ -193,6 +193,8 @@ Visit [http://localhost:5173](http://localhost:5173) in your browser. (default)
 
 ## Working on
 
+- [x] add a docker compose file to run each backend in a container
+- [x] deploy backends to railway and frontend to vercel
 - [ ] Tracing for the different backends
 - [ ] jwt auth for authentication
-- [ ] make this a production ready app
+- [ ] make this a production ready app (CI/CD, monitoring, logging, etc.)
