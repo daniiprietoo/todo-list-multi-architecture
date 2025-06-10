@@ -119,6 +119,7 @@ export async function createTask(
     return {
       success: response.data.success,
       message: response.data.message,
+      trace: response.data.trace ?? [],
     };
   } catch (error: unknown) {
     let message = "An unknown error occurred";
@@ -131,6 +132,7 @@ export async function createTask(
     return {
       success: false,
       error: message,
+      trace: [],
     };
   }
 }
@@ -158,6 +160,7 @@ export async function updateTask(
     return {
       success: response.data.success,
       message: response.data.message,
+      trace: response.data.trace ?? [],
     };
   } catch (error: unknown) {
     let message = "An unknown error occurred";
@@ -170,6 +173,7 @@ export async function updateTask(
     return {
       success: false,
       error: message,
+      trace: [],
     };
   }
 }
@@ -182,7 +186,11 @@ export async function deleteTask(
   try {
     const api = getApi(architecture);
     const response = await api.delete(`/tasks/${taskId}`, { data: { userId } });
-    return response.data;
+    return {
+      success: response.data.success,
+      message: response.data.message,
+      trace: response.data.trace ?? [],
+    };
   } catch (error: unknown) {
     let message = "An unknown error occurred";
     if (typeof error === "object" && error !== null && "response" in error) {
@@ -194,6 +202,7 @@ export async function deleteTask(
     return {
       success: false,
       error: message,
+      trace: [],
     };
   }
 }
@@ -205,6 +214,7 @@ export async function getTasks(userId: number, architecture: Architecture) {
     return {
       success: response.data.success,
       tasks: response.data.data ?? [],
+      trace: response.data.trace ?? [],
     };
   } catch (error: unknown) {
     let message = "An unknown error occurred";
@@ -217,6 +227,7 @@ export async function getTasks(userId: number, architecture: Architecture) {
     return {
       success: false,
       error: message,
+      trace: [],
     };
   }
 }

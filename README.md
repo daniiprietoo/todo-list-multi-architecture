@@ -84,7 +84,9 @@ git clone https://github.com/your-username/todo-list-multi-architecture.git
 cd todo-list-multi-architecture
 ```
 
-### 2. Install dependencies (monorepo)
+### 2. Install dependencies
+
+Install dependencies for each backend and frontend with:
 
 ```bash
 npm install
@@ -195,6 +197,6 @@ Visit [http://localhost:5173](http://localhost:5173) in your browser. (default)
 
 - [x] add a docker compose file to run each backend in a container
 - [x] deploy backends to railway and frontend to vercel
-- [ ] Tracing for the different backends
+- [ ] Tracing for the different backends to see the flow of requests
 - [ ] jwt auth for authentication
 - [ ] make this a production ready app (CI/CD, monitoring, logging, etc.)

@@ -12,6 +12,7 @@ import { Input } from "./ui/input";
 import { cn } from "@/lib/utils";
 import { Label } from "./ui/label";
 import { toast } from "sonner";
+import type { TraceStep } from "./trace-diagram";
 
 type CreateTaskFormProps = {
   userId: number;
@@ -19,6 +20,7 @@ type CreateTaskFormProps = {
   className?: string;
   props?: React.ComponentProps<"div">;
   onTaskCreated?: () => void;
+  setTrace: (trace: TraceStep[]) => void;
 };
 
 export function CreateTaskForm({
@@ -26,6 +28,7 @@ export function CreateTaskForm({
   architecture,
   className,
   onTaskCreated,
+  setTrace,
   ...props
 }: CreateTaskFormProps) {
   const [formData, setFormData] = useState({
@@ -53,11 +56,13 @@ export function CreateTaskForm({
 
     if (response.success) {
       setFormData({ title: "", description: "" });
+      setTrace(response.trace ?? []);
       if (onTaskCreated) onTaskCreated();
       toast.success("Task created successfully!");
     } else {
       console.error(response.message);
       setError(response.message);
+      setTrace(response.trace ?? []);
       toast.error(response.message || "Failed to create task");
     }
   };

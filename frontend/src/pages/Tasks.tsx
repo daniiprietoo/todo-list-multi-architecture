@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { ArchitectureSelector } from "@/components/architecture-selector";
 import { useArchitectureContext } from "@/hooks/architecture-context";
+import { TraceDiagram } from "@/components/trace-diagram";
+import type { TraceStep } from "@/components/trace-diagram";
 
 export default function Tasks() {
   const { user, logout } = useUser();
@@ -22,6 +24,7 @@ export default function Tasks() {
   }, [user, navigate]);
 
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [trace, setTrace] = useState<TraceStep[]>([]);
 
   const fetchTasks = useCallback(async () => {
     if (!user?.id) return;
@@ -49,6 +52,7 @@ export default function Tasks() {
       },
       architecture
     );
+    setTrace(response.trace ?? []);
     if (!response.success) {
       toast.error(response.error || "Failed to update task");
     } else {
@@ -60,6 +64,7 @@ export default function Tasks() {
   const handleDeleteTask = async (taskId: number) => {
     if (!user?.id) return;
     const response = await deleteTask(taskId, user.id, architecture);
+    setTrace(response.trace ?? []);
     if (!response.success) {
       toast.error(response.error || "Failed to delete task");
     } else {
@@ -89,12 +94,18 @@ export default function Tasks() {
             onSelect={setArchitecture}
           />
         </div>
+        {trace && trace.length > 0 && (
+          <div className="mb-6">
+            <TraceDiagram trace={trace} title="Request Flow Trace" />
+          </div>
+        )}
         <CreateTaskForm
           userId={user?.id as number}
           onTaskCreated={() => {
             fetchTasks();
           }}
           architecture={architecture}
+          setTrace={setTrace}
         />
         <div className="mt-8">
           <TasksList
